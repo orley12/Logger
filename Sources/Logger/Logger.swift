@@ -1,5 +1,9 @@
-// The Swift Programming Language
-// https://docs.swift.org/swift-book
+//
+//  Logger.swift
+//  Logger
+//
+//  Created by Oluwatosin Solarin on 07/07/2024.
+//
 
 import Foundation
 
