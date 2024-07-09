@@ -29,7 +29,6 @@ public class FileLogger: Logger {
     public func log(error: String) throws {
         do {
             try error.write(to: logFileUrl, atomically: true, encoding: .utf8)
-            print("File created successfully at \(logFileUrl.path)")
         } catch {
             throw LoggerError.write(error: "Failed to write to file: \(error.localizedDescription)")
         }
@@ -48,9 +47,7 @@ public class FileLogger: Logger {
                 
                 try fileManager.createDirectory(at: fileUrl, withIntermediateDirectories: true, attributes: nil)
             }
-            
-            print("Folder created successfully at \(fileUrl.path)")
-            
+                        
             return fileUrl
         } catch {
             throw LoggerError.fileCreation(error: "Failed to create file: \(error.localizedDescription)")
@@ -58,10 +55,10 @@ public class FileLogger: Logger {
     }
     
     private func buildLogDirectoryUrl() throws -> URL {
-        guard let desktopDirectory = fileManager.urls(for: .desktopDirectory, in: .userDomainMask).first else {
+        guard let documentsDirectory = fileManager.urls(for: .documentDirectory, in: .userDomainMask).first else {
             throw LoggerError.directory(error: "Failed to find the desktop directory.")
         }
         
-        return desktopDirectory.appendingPathComponent("Logs")
+        return documentsDirectory.appendingPathComponent("Logs")
     }
 }
